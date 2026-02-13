@@ -2,21 +2,10 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    //stocke la position logique (x, y)
     public int x;
     public int y;
 
     private bool occupied = false;
-
-    //empeche de jouer deux fois sur la meme case
-    public void SetOccupied()
-    {
-        occupied = true;
-    }
-    public bool IsOccupied()
-    {
-        return occupied;
-    }
     private GameController gameController;
 
     void Start()
@@ -26,8 +15,12 @@ public class Cell : MonoBehaviour
 
     void OnMouseDown()
     {
+        // Sur Android, OnMouseDown fonctionne avec un touch
         if (gameController != null)
             gameController.Play(this);
     }
 
+    public bool IsOccupied() => occupied;
+    public void SetOccupied() => occupied = true;
+    public void ResetCell() => occupied = false;
 }
